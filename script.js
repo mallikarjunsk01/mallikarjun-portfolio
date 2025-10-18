@@ -370,140 +370,140 @@ function closeProjectModal() {
 }
 
 // Resume Download Function
-// function downloadResume() {
-//     const btn = document.querySelector('.download-btn');
-//     const btnContent = btn.querySelector('.btn-content');
-//     const loader = btn.querySelector('.btn-loader');
-//     const progressBar = btn.querySelector('.progress-bar');
-    
-//     // Show loading state
-//     btnContent.style.opacity = '0.7';
-//     loader.style.display = 'block';
-//     btn.disabled = true;
-    
-//     // Simulate download progress
-//     let progress = 0;
-//     const progressInterval = setInterval(() => {
-//         progress += Math.random() * 20;
-//         progressBar.style.width = Math.min(progress, 100) + '%';
-        
-//         if (progress >= 100) {
-//             clearInterval(progressInterval);
-            
-//             // Create and trigger download
-//             const link = document.createElement('a');
-//             link.href = 'https://drive.google.com/uc?export=download&id=1_YT8jlIaFDrcmak-Bc_QPM31ALbZe-JH';
-//             link.download = 'Mallikarjun_SK_Resume.pdf';
-//             link.click();
-            
-//             // Show success state
-//             btnContent.innerHTML = `
-//                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-//                     <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-//                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-//                 </svg>
-//                 <span>Downloaded!</span>
-//             `;
-            
-//             // Reset after delay
-//             setTimeout(() => {
-//                 btnContent.innerHTML = `
-//                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-//                         <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-//                         <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-//                         <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-//                     </svg>
-//                     <span>Download PDF</span>
-//                 `;
-//                 btnContent.style.opacity = '1';
-//                 loader.style.display = 'none';
-//                 progressBar.style.width = '0%';
-//                 btn.disabled = false;
-//             }, 2000);
-//         }
-//     }, 100);
-// }
-// Resume Download Function
-function downloadResume(e) {
-    // Prevent the anchor's default navigation so we can open the direct download ourselves
-    if (e && e.preventDefault) e.preventDefault();
-
+function downloadResume() {
     const btn = document.querySelector('.download-btn');
-    const btnContent = btn ? btn.querySelector('.btn-content') : null;
-    const loader = btn ? btn.querySelector('.btn-loader') : null; // may be null
-    const progressBar = btn ? btn.querySelector('.progress-bar') : null;
-
-    // The direct-download URL for Google Drive (use this to instantly open download in a new tab)
-    const directUrl = 'https://drive.google.com/uc?export=download&id=1_YT8jlIaFDrcmak-Bc_QPM31ALbZe-JH';
-
-    // Immediate open using the user gesture so browsers won't block it
-    try {
-        window.open(directUrl, '_blank', 'noopener');
-    } catch (err) {
-        // fallback: set location (may navigate current tab)
-        window.location.href = directUrl;
-    }
-
-    if (!btn) return;
-
-    // Show loading state safely (only if elements exist)
-    if (btnContent) btnContent.style.opacity = '0.7';
-    if (loader) loader.style.display = 'block';
-    btn.setAttribute('aria-disabled', 'true');
-    btn.classList.add('downloading');
-
+    const btnContent = btn.querySelector('.btn-content');
+    const loader = btn.querySelector('.btn-loader');
+    const progressBar = btn.querySelector('.progress-bar');
+    
+    // Show loading state
+    btnContent.style.opacity = '0.7';
+    loader.style.display = 'block';
+    btn.disabled = true;
+    
     // Simulate download progress
     let progress = 0;
     const progressInterval = setInterval(() => {
         progress += Math.random() * 20;
-        if (progressBar) progressBar.style.width = Math.min(progress, 100) + '%';
-
+        progressBar.style.width = Math.min(progress, 100) + '%';
+        
         if (progress >= 100) {
             clearInterval(progressInterval);
-
-            // Optional: still try to trigger a programmatic download as a fallback (may be blocked)
-            const fallbackLink = document.createElement('a');
-            fallbackLink.href = directUrl;
-            fallbackLink.download = 'Mallikarjun_SK_Resume.pdf';
-            // Only try to click if it's likely allowed — this is just a fallback
-            try {
-                fallbackLink.click();
-            } catch (err) {
-                // ignore if blocked
-            }
-
+            
+            // Create and trigger download
+            const link = document.createElement('a');
+            link.href = 'https://drive.google.com/uc?export=download&id=1_YT8jlIaFDrcmak-Bc_QPM31ALbZe-JH';
+            link.download = 'Mallikarjun_SK_Resume.pdf';
+            link.click();
+            
             // Show success state
-            if (btnContent) {
-                btnContent.innerHTML = `
+            btnContent.innerHTML = `
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
                 </svg>
                 <span>Downloaded!</span>
-                `;
-            }
-
+            `;
+            
             // Reset after delay
             setTimeout(() => {
-                if (btnContent) {
-                    btnContent.innerHTML = `
+                btnContent.innerHTML = `
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <span>Download PDF</span>
-                    `;
-                    btnContent.style.opacity = '1';
-                }
-                if (loader) loader.style.display = 'none';
-                if (progressBar) progressBar.style.width = '0%';
-                btn.removeAttribute('aria-disabled');
-                btn.classList.remove('downloading');
+                `;
+                btnContent.style.opacity = '1';
+                loader.style.display = 'none';
+                progressBar.style.width = '0%';
+                btn.disabled = false;
             }, 2000);
         }
     }, 100);
 }
+// // Resume Download Function
+// function downloadResume(e) {
+//     // Prevent the anchor's default navigation so we can open the direct download ourselves
+//     if (e && e.preventDefault) e.preventDefault();
+
+//     const btn = document.querySelector('.download-btn');
+//     const btnContent = btn ? btn.querySelector('.btn-content') : null;
+//     const loader = btn ? btn.querySelector('.btn-loader') : null; // may be null
+//     const progressBar = btn ? btn.querySelector('.progress-bar') : null;
+
+//     // The direct-download URL for Google Drive (use this to instantly open download in a new tab)
+//     const directUrl = 'https://drive.google.com/uc?export=download&id=1_YT8jlIaFDrcmak-Bc_QPM31ALbZe-JH';
+
+//     // Immediate open using the user gesture so browsers won't block it
+//     try {
+//         window.open(directUrl, '_blank', 'noopener');
+//     } catch (err) {
+//         // fallback: set location (may navigate current tab)
+//         window.location.href = directUrl;
+//     }
+
+//     if (!btn) return;
+
+//     // Show loading state safely (only if elements exist)
+//     if (btnContent) btnContent.style.opacity = '0.7';
+//     if (loader) loader.style.display = 'block';
+//     btn.setAttribute('aria-disabled', 'true');
+//     btn.classList.add('downloading');
+
+//     // Simulate download progress
+//     let progress = 0;
+//     const progressInterval = setInterval(() => {
+//         progress += Math.random() * 20;
+//         if (progressBar) progressBar.style.width = Math.min(progress, 100) + '%';
+
+//         if (progress >= 100) {
+//             clearInterval(progressInterval);
+
+//             // Optional: still try to trigger a programmatic download as a fallback (may be blocked)
+//             const fallbackLink = document.createElement('a');
+//             fallbackLink.href = directUrl;
+//             fallbackLink.download = 'Mallikarjun_SK_Resume.pdf';
+//             // Only try to click if it's likely allowed — this is just a fallback
+//             try {
+//                 fallbackLink.click();
+//             } catch (err) {
+//                 // ignore if blocked
+//             }
+
+//             // Show success state
+//             if (btnContent) {
+//                 btnContent.innerHTML = `
+//                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+//                     <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+//                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+//                 </svg>
+//                 <span>Downloaded!</span>
+//                 `;
+//             }
+
+//             // Reset after delay
+//             setTimeout(() => {
+//                 if (btnContent) {
+//                     btnContent.innerHTML = `
+//                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+//                         <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+//                         <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+//                         <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+//                     </svg>
+//                     <span>Download PDF</span>
+//                     `;
+//                     btnContent.style.opacity = '1';
+//                 }
+//                 if (loader) loader.style.display = 'none';
+//                 if (progressBar) progressBar.style.width = '0%';
+//                 btn.removeAttribute('aria-disabled');
+//                 btn.classList.remove('downloading');
+//             }, 2000);
+//         }
+//     }, 100);
+// }
 
 // Contact Form Handler
 function setupContactForm() {
