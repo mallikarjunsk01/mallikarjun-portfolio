@@ -392,7 +392,7 @@ function downloadResume() {
             
             // Create and trigger download
             const link = document.createElement('a');
-            link.href = 'https://drive.google.com/uc?export=download&id=1_YT8jlIaFDrcmak-Bc_QPM31ALbZe-JH';
+            link.href = 'data:application/pdf;base64,';
             link.download = 'Mallikarjun_SK_Resume.pdf';
             link.click();
             
